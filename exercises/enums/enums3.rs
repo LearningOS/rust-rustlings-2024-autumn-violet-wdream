@@ -5,7 +5,6 @@
 // Execute `rustlings hint enums3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 struct Point {
     x: u8,
     y: u8,
