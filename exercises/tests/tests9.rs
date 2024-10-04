@@ -33,7 +33,7 @@ extern "Rust" {
     fn my_demo_function(a: u32) -> u32;
     fn my_demo_function_alias(a: u32) -> u32;
 }
-
+/* 
 mod Foo {
     // No `extern` equals `extern "Rust"`.
     fn my_demo_function(a: u32) -> u32 {
@@ -57,5 +57,27 @@ mod tests {
             my_demo_function(123);
             my_demo_function_alias(456);
         }
+    }
+}
+*/
+mod Foo {
+    #[no_mangle]
+    pub extern "C" fn my_demo_function() {
+        println!("Hello from my_demo_function");
+    }
+
+    pub extern "C" fn my_demo_function_alias() {
+        my_demo_function();
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::Foo::{my_demo_function, my_demo_function_alias};
+
+    #[test]
+    fn test_success() {
+        my_demo_function();
+        my_demo_function_alias();
     }
 }
